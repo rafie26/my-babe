@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Foto Pacar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(45deg, #ffafbd, #ffc3a0);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .photo-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .photo-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .photo-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .message {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #fff;
+            margin: 1.5rem 0;
+            font-weight: bold;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .btn-next {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2rem;
+            background: #ff6b9c;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-next:hover {
+            background: #ff4785;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+        
+        .btn-container {
+            text-align: center;
+        }
+        
+        .icon {
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+        
+        .heart {
+            color: #ff2a6d;
+            animation: pulse 1.5s infinite;
+            font-size: 2rem;
+        }
+        
+        .floating-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .icon-1 {
+            top: 10px;
+            right: 10px;
+            color: #ffcc00;
+        }
+        
+        .icon-2 {
+            bottom: 10px;
+            left: 10px;
+            color: #ff6b9c;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(10deg); }
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f0f;
+            top: -10px;
+            animation: confetti-fall 5s linear infinite;
+        }
+        
+        @keyframes confetti-fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Responsiveness */
+        @media (max-width: 992px) {
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .message {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .photo-card img {
+                height: 250px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .message {
+                font-size: 1.5rem;
+            }
+            
+            .btn-next {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <i class="fas fa-camera-retro icon"></i>
+            TOP 8 POTO ORANG IMUP
+            <i class="fas fa-heart icon"></i>
+        </h1>
+        
+        <div class="gallery">
+            <div class="photo-card">
+                <img src="poto2.jpg" alt="Foto 1">
+                <i class="fas fa-star floating-icon icon-1"></i>
+                <i class="fas fa-kiss-wink-heart floating-icon icon-2"></i>
+            </div>
+            <div class="photo-card">
+                <img src="poto3.jpg" alt="Foto 2">
+                <i class="fas fa-coffee floating-icon icon-1"></i>
+                <i class="fas fa-music floating-icon icon-2"></i>
+            </div>
+            <div class="photo-card">
+                <img src="poto4.jpg" alt="Foto 3">
+                <i class="fas fa-hamburger floating-icon icon-1"></i>
+                <i class="fas fa-ice-cream floating-icon icon-2"></i>
+            </div>
+            <div class="photo-card">
+                <img src="poto6.jpg" alt="Foto 4">
+                <i class="fas fa-gift floating-icon icon-1"></i>
+                <i class="fas fa-crown floating-icon icon-2"></i>
+            </div>
+            <div class="photo-card">
+                <img src="poto5.jpg" alt="Foto 5">
+                <i class="fas fa-moon floating-icon icon-1"></i>
+                <i class="fas fa-sun floating-icon icon-2"></i>
+            </div>
+            <div class="photo-card">
+                <img src="poto7.jpg" alt="Foto 6">
+                <i class="fas fa-snowflake floating-icon icon-1"></i>
+                <i class="fas fa-fire floating-icon icon-2"></i>
+            </div>
+            <div class="photo-card">
+                <img src="poto8.jpg" alt="Foto 7">
+                <i class="fas fa-plane floating-icon icon-1"></i>
+                <i class="fas fa-map-marker-alt floating-icon icon-2"></i>
+            </div>
+            <div class="photo-card">
+                <img src="poto11.jpg" alt="Foto 8">
+                <i class="fas fa-camera floating-icon icon-1"></i>
+                <i class="fas fa-palette floating-icon icon-2"></i>
+            </div>
+        </div>
+        
+        <div class="message">
+            I'm so lucky to have u
+            <i class="fas fa-heart heart"></i>
+        </div>
+        
+        <div class="btn-container"  onclick="location.href='next2.html'">
+            <button class="btn-next" >
+                KLICK BABE
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animasi foto muncul secara bertahap
+            const photos = document.querySelectorAll('.photo-card');
+            photos.forEach((photo, index) => {
+                photo.style.opacity = 0;
+                setTimeout(() => {
+                    photo.style.transition = 'opacity 0.5s ease';
+                    photo.style.opacity = 1;
+                }, index * 150);
+            });
+            
+            // Tambahkan sedikit confetti saat halaman dimuat
+            setTimeout(createConfetti, 500);
+        });
+        
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = getRandomColor();
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(confetti);
+                
+                // Hapus elemen confetti setelah animasi selesai
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+        
+        function getRandomColor() {
+            const colors = ['#ff6b9c', '#ffcc00', '#05d9e8', '#ff2a6d', '#d1f7ff', '#ff8a5c'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+</html>
